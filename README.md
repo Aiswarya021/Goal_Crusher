@@ -7,8 +7,11 @@ Features:
 * Mark tasks as complete with a checklist
 
 Tech Stack:
-Backend: Flask + SQLAlchemy
+
+Backend: Flask 
+
 Frontend: HTML, CSS
+
 Database: SQLAlchemy 
 
 Goal Crusher is ideal for anyone who wants a minimal, focused task tracker to stay organized and motivated.
