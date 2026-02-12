@@ -1,5 +1,5 @@
 
-Goal Crusher is a simple and intuitive web app built with Flask, HTML, CSS, and SQLAlchemy that helps users manage tasks and checklists efficiently. Track your goals by adding tasks, editing them, and marking them complete.
+Goal Crusher is a simple web app built with Flask, HTML, CSS, and SQLAlchemy that helps users manage tasks and checklists efficiently. Track your goals by adding tasks, editing them, and marking them complete.
 
 Features:
 * Add new tasks for your goals
