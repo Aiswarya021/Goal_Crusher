@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block head %}
+<title>Goal Crusher</title>
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    <h1>Goal Crusher</h1>
+
+    <!-- ADD TASK FORM -->
+    <form action="/" method="POST" class="task-form">
+        <h3>Task:</h3>
+        <input type="text" name="content" placeholder="Enter a task" required>
+        <h3>Due Date:</h3>
+        <input type="date" name="due_date" required>
+        <button class="add-btn" type="submit">Add Task</button>
+    </form>
+
+    {% if tasks|length < 1 %}
+        <h3>No tasks yet</h3>
+    {% else %}
+
+    <!-- TASK TABLE -->
+    <table>
+        <tr>
+            <th>Done</th>
+            <th>Task</th>
+            <th>Added</th>
+            <th>Due Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+
+        {% for task in tasks %}
+        <tr>
+
+            <!-- CHECKBOX -->
+            <td>
+                <a href="/complete/{{task.id}}">
+                    {% if task.complete == 1 %}
+                        ☑️
+                    {% else %}
+                        ⬜
+                    {% endif %}
+                </a>
+            </td>
+
+            <!-- TASK NAME (strike if completed) -->
+            <td>
+                {% if task.complete == 1 %}
+                    <s>{{ task.content }}</s>
+                {% else %}
+                    {{ task.content }}
+                {% endif %}
+            </td>
+
+            <!-- DATE CREATED -->
+            <td>{{ task.date_created.strftime("%d-%m-%Y") }}</td>
+
+            <!-- DUE DATE (converted to d-m-y) -->
+            <td>
+                {{ task.due_date[8:10] }}-{{ task.due_date[5:7] }}-{{ task.due_date[0:4] }}
+            </td>
+
+            <!-- STATUS -->
+            <td>
+            {% if task.complete == 1 %}
+                <span class="status completed">Completed</span>
+            {% else %}
+                {% if delays[task.id] > 0 %}
+                    <span class="status delayed">Delayed by {{ delays[task.id] }} days</span>
+                {% else %}
+                    <span class="status ontime">On Time</span>
+                {% endif %}
+            {% endif %}
+            </td>
+
+
+            <!-- ACTION BUTTONS -->
+            <td>
+                <a class="delete-btn" href="/delete/{{task.id}}">Delete</a>
+                <a class="update-btn" href="/update/{{task.id}}">Edit</a>
+            </td>
+
+        </tr>
+        {% endfor %}
+    </table>
+
+    {% endif %}
+</div>
+{% endblock %}
